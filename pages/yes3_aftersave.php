@@ -91,7 +91,7 @@ $module->initializeJavascriptModuleObject();
             }).catch(function(err){
 
                 console.error(err);
-                alert(`Aftersave reports an AJAX error: ${err}.`);
+                //alert(`Aftersave reports an AJAX error: ${err}.`);
             })
         }
 
@@ -111,7 +111,7 @@ These will be all forms having fields that figure in calculations on <em>other</
 You may prevent this action for any dependent form in the standard EM configuration.</p>
 
 <p>
-    <input type="button" class="y3as-button" onclick="Y3AS.selectForms()" value="Splash on some Aftersave!" />
+    <input type="button" class="y3as-button" onclick="Y3AS.selectForms()" value="Splash on some YES3 Aftersave!" />
 </p>
 
 <table class="y3as-aftersave">
