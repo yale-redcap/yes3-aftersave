@@ -6,7 +6,7 @@ Peter Charpentier
 
 June 2023
 
-YES3 Aftersave ensures that calculated fields across all forms are updated and saved in real time.
+YES3 Aftersave ensures that affected calculated fields on forms other than a form being saved are updated and saved in real time.
 
 It works by first identifying all forms having fields that figure in calculated fields on other forms. When any of these 'aftersave' forms is saved, all of the affected calculated fields on 'dependent' forms are updated and saved. The default REDCap recalculation behavior of bypassing empty forms can be overriden for any dependent form.
 
@@ -18,7 +18,7 @@ A multipass recalculation is performed, that should ensure that complex expressi
 
 Setting up YES3 Aftersave is a two step process, as follows. This process should be repeated whenever a calculated field is added, modified or removed in your project.
 
-### Step 1. Run the "YES3 Aftersave" EM link
+### Step 1. Open the "YES3 Aftersave" EM link and run the YES3 Aftersave utility
 
 This utility program will identify all the 'aftersave' forms in your project, and all the dependent forms and fields, and populate the EM configuration settings with this information.
 
