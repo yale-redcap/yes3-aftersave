@@ -1,8 +1,10 @@
 # YES3 Aftersave
 
 Peter Charpentier
-CRI Web Tools LLC
-Yale University
+<br>CRI Web Tools LLC
+<br>Yale University
+
+June 2023
 
 YES3 Aftersave ensures that calculated fields across all forms are updated and saved in real time.
 
