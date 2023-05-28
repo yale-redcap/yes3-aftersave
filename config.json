@@ -3,7 +3,9 @@
 
     "namespace": "Yale\\Yes3Aftersave",
 
-    "description": "User-defined record-level dashboards to support study workflows.",
+    "description": "YES3 Aftersave ensures that calculations involving data from multiple forms are updated and saved in real time. A multipass recalculation is performed so that complex expressions involving interdependent calculated fields are resolved. An option to perform calculations on otherwise empty forms is provided.",
+
+    "documentation": "https://github.com/yale-redcap/yes3-aftersave#readme",
 
     "prefix": "yes3_aftersave",
 
@@ -24,47 +26,89 @@
         }
     ],
 
-    "permissions": [
-        "redcap_save_record",
-        "redcap_module_ajax"
-    ],
-
     "auth-ajax-actions": [
-        "selectForms"
+        "setConfig"
     ],
 
     "project-settings": [
         {
-            "key": "yes3-dashboard-instructions-yes3-form",
-            "name": "<div style='color: slategrey; font-weight: 600'>Please identify the form(s) that will hold any YES3-related calculated fields (see README).</div>",
+            "key": "yes3-aftersave-instructions-dependent-forms-1",
+            "name": "<h6 style='background-color: indianred; color: white; padding: 15px'>NOTE: Run the <strong>YES3 Aftersave</strong> EM link before you fill out this configuration, and after any project design involving calculated fields.</h6>",
             "type": "descriptive"
         },
         {
-           "key": "yes3-aftersave-forms",
-           "name": "YES3 aftersave form",
-           "required": true,
+            "key": "yes3-aftersave-instructions-dependent-forms-2",
+            "name": "<h6 style='padding: 15px; color: darkslategrey; border: 2px solid darkslategrey'>Below are forms that have calculated fields that depend on other forms. For each, indicate whether YES3 Aftersave should never be triggered, triggered only when the form is non-empty (the REDCap default), or always triggered.</h6>",
+            "type": "descriptive"
+        },
+        {
+           "key": "yes3-dependent-forms",
+           "name": "Dependent forms",
+           "required": false,
            "type": "sub_settings",
            "repeatable":true,
            "sub_settings":[
-            {
-                "key": "yes3-aftersave-form",
-                "name": "form",
-                "required": true,
-                "type": "form-list"
-            },
-            {
-                "key": "yes3-aftersave-form-skip-calc-empty",
-                "name": "skip autocalculation if empty",
-                "required": false,
-                "type": "checkbox"
-            },
-            {
-                "key": "yes3-aftersave-form-external-calcs",
-                "name": "affected external calc fields (READ ONLY)",
-                "required": false,
-                "type": "textarea"
-            }
-           ]
+                {
+                    "key": "yes3-dependent-form",
+                    "name": "Dependent form",
+                    "required": false,
+                    "type": "form-list"
+                },
+                {
+                    "key": "yes3-dependent-form-aftersave-action",
+                    "name": "Aftersave action for this form",
+                    "required": false,
+                    "type": "radio",
+                    "choices":[
+                        {
+                            "name": "never triggered",
+                            "value": "1"
+                        },
+                        {
+                            "name": "triggered if non-empty",
+                            "value": "2"
+                        },
+                        {
+                            "name": "always triggered",
+                            "value": "3"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "key": "yes3-aftersave-instructions-readonly-settings",
+            "name": "<h6 style='padding: 15px; color: darkslategrey; border: 2px solid darkslategrey'>The following JSON settings are READ ONLY and visible only to superusers. If you accidentally demolish any of these, you may rebuild them via the 'YES3 Aftersave' EM link.</h6>",
+            "type": "descriptive",
+            "super-users-only": true
+        },
+        {
+            "key": "aftersave-forms-json",
+            "name": "aftersave forms",
+            "required": false,
+            "type": "textarea",
+            "super-users-only": true
+        },
+        {
+            "key": "dependent-forms-json",
+            "name": "dependent forms",
+            "required": false,
+            "type": "textarea",
+            "super-users-only": true
+        },
+        {
+            "key": "form-bridge-json",
+            "name": "form bridge",
+            "required": false,
+            "type": "textarea",
+            "super-users-only": true
+        },
+        {
+            "key": "field-bridge-json",
+            "name": "field bridge",
+            "required": false,
+            "type": "textarea",
+            "super-users-only": true
         }
     ],
 
@@ -84,8 +128,8 @@
 
     "compatibility": {
         "php-version-min": "7.4",
-        "redcap-version-min": "12.0.4"
+        "redcap-version-min": "13.4.9"
     },
 
-    "framework-version": 9
+    "framework-version": 12
 }

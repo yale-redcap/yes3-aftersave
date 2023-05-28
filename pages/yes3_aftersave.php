@@ -2,19 +2,39 @@
 
 $module = new \Yale\Yes3Aftersave\Yes3Aftersave();
 
+$PID = $module->getProjectId();
+$ProjTitle = $module->getProject()->getTitle();
+
 $module->initializeJavascriptModuleObject();
 
 ?>
 
 <style>
 
-    table.y3as-aftersave td {
+    @media print {
+        #west, #south {
+            display: none;
+        }
+    }
 
-        vertical-align: top;
-        padding-right: 10px;
-        padding-top: 10px;
-        padding-left: 0;
-        padding-bottom: 10px;
+    i.y3as-action-icon {
+
+        font-size: 1.5rem;
+        color: slategray;
+        opacity: 50%;
+    }
+
+    i.y3as-action-icon:hover {
+
+        cursor: pointer;
+        color: dodgerblue;
+        opacity: 100%;
+    }
+
+    .y3as-response {
+
+        display:none;
+        margin-top: 10px;
     }
 
     input.y3as-button {
@@ -34,7 +54,6 @@ $module->initializeJavascriptModuleObject();
         color: white;
     }
 
-
 </style>
 
 <script>
@@ -43,11 +62,11 @@ $module->initializeJavascriptModuleObject();
 
         jmo: <?= $module->getJavascriptModuleObjectName() ?>,
 
-        selectForms: ()=>{
+        setConfig: ()=>{
 
-            Y3AS.jmo.ajax( 'selectForms', {}).then(function(response){
+            Y3AS.jmo.ajax( 'setConfig', {}).then(function(response){
 
-                console.log(response);
+                //console.log(response);
 
                 const dash = "-";
                 const ddash = "=";
@@ -58,35 +77,69 @@ $module->initializeJavascriptModuleObject();
                 let ka = 0;
                 let kd = 0;
 
-                for(const form_name in response.aftersaveForms){
+                let s = "";
+
+                for(let j=0; j<response.aftersave_forms.length; j++){
 
                     ka++;
 
-                    txta += "\n" + dash.repeat(form_name.length) 
-                        + "\n" + form_name 
-                        + "\n" + dash.repeat(form_name.length) 
+                    txta += "\n" + dash.repeat(response.aftersave_forms[j].length) 
+                        + "\n" + response.aftersave_forms[j] 
+                        + "\n" + dash.repeat(response.aftersave_forms[j].length) 
                         + "\nhas fields that figure in the calculation of:"
-                        + "\n" + response.aftersaveForms[form_name];
+                    ;
+
+                    s = "?";
+
+                    for(let i=0; i<response.field_bridge.length; i++){
+
+                        if ( response.field_bridge[i].aftersave_form_name === response.aftersave_forms[j] 
+                                && s !== response.field_bridge[i].dependent_field_name ){
+
+                            s = response.field_bridge[i].dependent_field_name;
+
+                            txta += "\n[" + response.field_bridge[i].dependent_field_name + "] on " + response.field_bridge[i].dependent_form_name;
+                        }
+                    }
+                    
+                    txta += "\n";                        
                 }
 
                 txta = ka + " FORM(S) AFFECT CALCULATIONS IN OTHER FORMS\nSaving any of these forms will trigger Aftersave.\n" + txta;
 
-                $('#y3as-response-aftersaveForms').text(txta);
+                $('#y3as-response-aftersave_forms').text(txta);
 
-                for(const dep_form_name in response.dependentForms){
+                for(let j=0; j<response.dependent_forms.length; j++){
 
                     kd++;
 
-                    txtd += "\n" + dash.repeat(dep_form_name.length) 
-                        + "\n" + dep_form_name 
-                        + "\n" + dash.repeat(dep_form_name.length) 
+                    txtd += "\n" + dash.repeat(response.dependent_forms[j].length) 
+                        + "\n" + response.dependent_forms[j] 
+                        + "\n" + dash.repeat(response.dependent_forms[j].length) 
                         + "\nhas calculations that depend on:"
-                        + "\n" + response.dependentForms[dep_form_name];
+                    ;
+
+                    s = "?";
+
+                    for(let i=0; i<response.field_bridge.length; i++){
+
+                        if ( response.field_bridge[i].dependent_form_name === response.dependent_forms[j] 
+                                && s !== response.field_bridge[i].aftersave_field_name ){
+                            
+                            s = response.field_bridge[i].aftersave_field_name;
+
+                            txtd += "\n[" + response.field_bridge[i].aftersave_field_name + "] on " + response.field_bridge[i].aftersave_form_name;
+                        }
+                    }
+
+                    txtd += "\n";
                 }
 
                 txtd = kd + " FORM(S) HAVE CALCULATIONS THAT DEPEND ON OTHER FORMS\nThese forms will be calculated and saved by Aftersave.\n" + txtd;
 
-                $('#y3as-response-dependentForms').text(txtd);
+                $('#y3as-response-dependent_forms').text(txtd);
+
+                $(".y3as-response").show();
 
             }).catch(function(err){
 
@@ -99,26 +152,50 @@ $module->initializeJavascriptModuleObject();
     }
 </script>
 
-<h3>YES3 Aftersave</h3>
+<div class='container'>
 
-<p>Click the button below to have YES3 Aftersave determine the forms to which to attach the "after save" calculation execution.
-These will be all forms having fields that figure in calculations on <em>other</em> forms.</p>
+    <div class="row">
 
-<p>This program will also determine which forms have calculated fields that depend on fields in other forms.
-    The calculated fields on these <em>dependent</em> forms will be recalculated and saved by the "after save" process.</p>
+        <div class='col-lg-12'>
 
-<p>The default is that all dependent forms are recalculated and saved <em>even if they are empty</em>.
-You may prevent this action for any dependent form in the standard EM configuration.</p>
+            <h3>YES3 Aftersave</h3>
+            <h6><?= $ProjTitle ?>&nbsp;&nbsp;pid#<?= $PID ?></h6>
 
-<p>
-    <input type="button" class="y3as-button" onclick="Y3AS.selectForms()" value="Splash on some YES3 Aftersave!" />
-</p>
+            <p class="d-print-none">Click the button below to have YES3 Aftersave determine the forms to which to attach the "after save" calculation execution.
+            These will be all forms having fields that figure in calculations on <em>other</em> forms.</p>
 
-<table class="y3as-aftersave">
+            <p class="d-print-none">This program will also determine which forms have calculated fields that depend on fields on other forms.
+                The calculated fields on these <em>dependent</em> forms may or may not be recalculated and saved by YES3 Aftersave,
+                depending on options that you set in the EM configuration settings.</p>
 
-    <tr>
-        <td><pre id="y3as-response-aftersaveForms"></pre></td>
-        <td><pre id="y3as-response-dependentForms"></pre></td>
-    </tr>
+            <p class="d-print-none">The default is for YES3 Aftersave to be triggered for non-empty dependent forms,
+            which is the REDCap default for autocalculations.
+            You may choose to have YES3 Aftersave triggered even for empty forms, or to never be triggered for selected forms.</p>
 
-</table>
+            <p class="d-print-none">YES3 Aftersave will carry out a multi-pass recalculation, so that complex expressions involving interdependent calculated fields should be resolved correctly.</p>
+
+        </div>
+    </div>
+
+    <div class="row" class="d-print-none">
+        <div class="col-lg-6">
+            <input type="button" class="y3as-button d-print-none" onclick="Y3AS.setConfig()" value="Splash on some YES3 Aftersave!" />
+        </div>
+        <div class="col-lg-6">
+            <i class="fa-solid fa-print y3as-action-icon float-end d-print-none y3as-response" title="print this report" onclick="window.print()"></i>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-6">
+            <pre class="y3as-response" id="y3as-response-aftersave_forms"></pre>
+        </div>
+
+        <div class="col-lg-6">
+            <pre class="y3as-response" id="y3as-response-dependent_forms">
+        </div>
+        
+    </div>
+
+</div>
