@@ -12,7 +12,7 @@ It works by first identifying all forms having fields that figure in calculated 
 
 A multipass recalculation is performed, that should ensure that complex expressions involving interdependent calculated fields are resolved correctly.
 
-> YES3 Aftersave is not a substitute for Rule H, or for Adam Nunez' **Recalculate** EM. YES3 Aftersave performs real-time, multipass record-level recalculations only for expressions that involve forms other than the form being saved.
+> YES3 Aftersave is not a substitute for Rule H, or for Adam Nunez' **Recalculate** EM. YES3 Aftersave performs real-time, multipass record-level recalculations only for affected calculated fields on forms other than the form being saved.
 
 ## SETUP
 
