@@ -22,9 +22,11 @@ Setting up YES3 Aftersave is a two step process, as explained below. This proces
 
 This utility program will identify all the 'aftersave' forms in your project, and all the dependent forms and fields, and populate or revise the EM configuration settings with this information.
 
-To run the YES3 Aftersave Utility, open the "YES3 Aftersave" EM link and click the button labeled "Splash on some YES3 Aftersave!" (sorry, we couldn't resist).
+To run the YES3 Aftersave Utility, open the "YES3 Aftersave" EM link and click the button labeled "Splash on some YES3 Aftersave!".
 
 ![image of the button to run the YES3 Aftersave utility](./media/splash-on.png)
+
+ (sorry, we couldn't resist)
 
 ### Step 2. Review and adjust the EM configuration settings
 
