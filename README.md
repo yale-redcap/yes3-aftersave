@@ -37,3 +37,9 @@ In our studies, we often have a "tracking form" that consists entirely of calcul
 You may also choose to have YES3 Aftersave ignore any dependent form.
 
 > You should not add or remove dependent forms manually through the EM configuration settings. Let the YES3 Aftersave utility do that.
+
+## ACKNOWLEDGEMENTS
+
+Thanks to Adam Nunez for insights into the REDCap calculation execution and save processes.
+
+chatGPT:tm: plus is awarded partial credit for the name of this module.
