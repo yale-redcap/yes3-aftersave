@@ -42,4 +42,4 @@ You may also choose to have YES3 Aftersave ignore any dependent form.
 
 Thanks to Adam Nunez for insights into the REDCap calculation execution and save processes.
 
-chatGPT:tm: plus is awarded partial credit for the name of this module.
+chatGPT plus:tm: is awarded partial credit for the name of this module.
