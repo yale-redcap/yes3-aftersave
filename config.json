@@ -38,7 +38,7 @@
         },
         {
             "key": "yes3-aftersave-instructions-dependent-forms-2",
-            "name": "<h6 style='padding: 15px; color: darkslategrey; border: 2px solid darkslategrey'>Below are forms that have calculated fields that depend on other forms. For each, indicate whether YES3 Aftersave should never be triggered, triggered only when the form is non-empty (the REDCap default), or always triggered.</h6>",
+            "name": "<h6 style='padding: 15px; color: darkslategrey; border: 2px solid darkslategrey'>Below are forms that have calculated fields that depend on other forms. For each, indicate whether YES3 Aftersave should never recalculate, recalculate only when the form is non-empty (the REDCap default), or always recalculate.</h6>",
             "type": "descriptive"
         },
         {
@@ -61,15 +61,15 @@
                     "type": "radio",
                     "choices":[
                         {
-                            "name": "never triggered",
+                            "name": "never recalculate",
                             "value": "1"
                         },
                         {
-                            "name": "triggered if non-empty",
+                            "name": "recalculate if non-empty",
                             "value": "2"
                         },
                         {
-                            "name": "always triggered",
+                            "name": "always recalculate",
                             "value": "3"
                         }
                     ]

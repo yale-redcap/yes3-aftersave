@@ -187,15 +187,12 @@ $module->initializeJavascriptModuleObject();
     </div>
 
     <div class="row">
-
         <div class="col-lg-6">
             <pre class="y3as-response" id="y3as-response-aftersave_forms"></pre>
         </div>
-
         <div class="col-lg-6">
             <pre class="y3as-response" id="y3as-response-dependent_forms">
-        </div>
-        
+        </div>      
     </div>
 
 </div>
