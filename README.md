@@ -40,6 +40,6 @@ You may also choose to have YES3 Aftersave ignore any dependent form.
 
 ## ACKNOWLEDGEMENTS
 
-Thanks to Adam Nunez for insights into the REDCap calculation execution and save processes.
+Thanks to **Adam Nunez** and **Andrew Poppe** for insights into the REDCap calculation execution and save processes.
 
-chatGPT plus:tm: is awarded partial credit for the name of this module.
+**chatGPT plus** is awarded partial credit for the name of this module.
