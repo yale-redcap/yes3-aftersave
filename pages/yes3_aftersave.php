@@ -179,7 +179,7 @@ $module->initializeJavascriptModuleObject();
 
     <div class="row" class="d-print-none">
         <div class="col-lg-6">
-            <input type="button" class="y3as-button d-print-none" onclick="Y3AS.setConfig()" value="Splash on some YES3 Aftersave!" />
+            <input type="button" class="y3as-button d-print-none" onclick="Y3AS.setConfig()" value="Splash on some YES3 Aftersave!" title="click to run the YES3 Aftersave utility" />
         </div>
         <div class="col-lg-6">
             <i class="fa-solid fa-print y3as-action-icon float-end d-print-none y3as-response" title="print this report" onclick="window.print()"></i>
