@@ -162,12 +162,24 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
         return ( $x[0]['complete'] ) ? true:false;
     }
 
+
+    /* === HOOKS === */
+
+    function redcap_module_link_check_display($project_id, $link){
+
+        if ( $this->getUser()->hasDesignRights() ) return $link;
+
+        return null;
+    }
+
     public function redcap_module_ajax($action, $payload, $project_id, $record, $instrument, $event_id, $repeat_instance, $survey_hash, $response_id, $survey_queue_hash, $page, $page_full, $user_id, $group_id){
 
         if ( $action==="setConfig" ) return $this->setConfig( $project_id );
 
         return "The action '{$action}' is not supported.";
     }
+
+    
 
     /**
      * Ransacks field metadata to build the required structures, and saves them as EM config settings.
