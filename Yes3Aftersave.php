@@ -99,7 +99,15 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
         $this->logDebugMessage('calculateDependentForm:args', print_r(func_get_args(), true));
 
         /**
-         * If needed, initialize the form by saving the completion status,
+         * Designer has elected to ignore this form, i.e. aftersave will not recalculate any fields on it
+         */
+        if ( $aftersave_action===$this->AFTERSAVE_ACTION_IGNORE ){
+
+            return 0;
+        }
+
+        /**
+         * If designer has elected to always recalculate fields on this form, if needed initialize the form by saving the completion status,
          * because REDCap calc functions skip uninitialized forms
          */
         if ( $aftersave_action === $this->AFTERSAVE_ACTION_ALWAYS && !$this->formIsInitialized( $project_id, $form_name, $record, $event_id, $repeat_instance ) ) {
