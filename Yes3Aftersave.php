@@ -68,6 +68,8 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
     
         for($i=0; $i<count($dependent_forms); $i++){
 
+            // skipThisForm is the form being saved
+            
             if ( $dependent_forms[$i] !== $skipThisForm ){
 
                 /**
@@ -86,7 +88,10 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
 
                 foreach( $this->getREDCapEventsForForm($project_id, $dependent_forms[$i]) as $event_id ){
 
-                    $k += $this->calculateDependentForm( $project_id, $record, $event_id, $repeat_instance, $dependent_forms[$i], $aftersave_actions[$i], $dependent_fields );
+                    if ( $aftersave_actions[$i]!==$this->AFTERSAVE_ACTION_IGNORE ){
+
+                        $k += $this->calculateDependentForm( $project_id, $record, $event_id, $repeat_instance, $dependent_forms[$i], $aftersave_actions[$i], $dependent_fields );
+                    }
                 }
             }
         }
@@ -97,14 +102,6 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
     private function calculateDependentForm( $project_id, $record, $event_id, $repeat_instance, $form_name, $aftersave_action, $fields ){
 
         $this->logDebugMessage('calculateDependentForm:args', print_r(func_get_args(), true));
-
-        /**
-         * Designer has elected to ignore this form, i.e. aftersave will not recalculate any fields on it
-         */
-        if ( $aftersave_action===$this->AFTERSAVE_ACTION_IGNORE ){
-
-            return 0;
-        }
 
         /**
          * If designer has elected to always recalculate fields on this form, if needed initialize the form by saving the completion status,
