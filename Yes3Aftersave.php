@@ -20,7 +20,7 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
     private $MAX_SAVE_PASSES = 8;
     private $DEFAULT_FORM_COMPLETE = "1";
     public  $LOG_DEBUG_TABLE = "ydcclib_debug_messages";
-    public  $ALLOW_DEBUG_LOGGING = true;
+    public  $ALLOW_DEBUG_LOGGING = false;
 
     function redcap_save_record ( 
         $project_id,
@@ -34,11 +34,11 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
     ){
         // only proceed if this is a registered 'Aftersave' form
 
-        $this->logDebugMessage('redcap_save_record:args', print_r(func_get_args(), true));
+        //$this->logDebugMessage('redcap_save_record:args', print_r(func_get_args(), true));
 
         $aftersave_forms = json_decode($this->getProjectSetting('aftersave-forms-json'));
 
-        $this->logDebugMessage('redcap_save_record:aftersave_forms', print_r($aftersave_forms, true));
+        //$this->logDebugMessage('redcap_save_record:aftersave_forms', print_r($aftersave_forms, true));
 
         if ( is_array($aftersave_forms) && in_array($instrument, $aftersave_forms) ){
 
@@ -62,13 +62,13 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
 
     public function calculateDependentForms( $project_id, $record, $repeat_instance, $skipThisForm, $dependent_forms, $aftersave_actions, $field_bridge ){
 
-        $this->logDebugMessage('calculateDependentForms:args', print_r(func_get_args(), true));
+        //$this->logDebugMessage('calculateDependentForms:args', print_r(func_get_args(), true));
 
         $k = 0;
     
         for($i=0; $i<count($dependent_forms); $i++){
 
-            // skipThisForm is the form being saved
+            // skipThisForm if the form being saved
             
             if ( $dependent_forms[$i] !== $skipThisForm ){
 
@@ -101,7 +101,7 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
 
     private function calculateDependentForm( $project_id, $record, $event_id, $repeat_instance, $form_name, $aftersave_action, $fields ){
 
-        $this->logDebugMessage('calculateDependentForm:args', print_r(func_get_args(), true));
+        //$this->logDebugMessage('calculateDependentForm:args', print_r(func_get_args(), true));
 
         /**
          * If designer has elected to always recalculate fields on this form, if needed initialize the form by saving the completion status,
@@ -130,7 +130,7 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
                 $data
             );
 
-            $this->logDebugMessage('calculateDependentForm:saveComplete', print_r($rc, true));
+            //$this->logDebugMessage('calculateDependentForm:saveComplete', print_r($rc, true));
         }
 
         /**
@@ -154,7 +154,9 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
 
         $complete_field = $form_name . '_complete';
 
-        $sql = "SELECT `value` AS `complete` FROM redcap_data WHERE project_id=? AND `record`=? AND `event_id`=? AND ifnull(`instance`, 1)=? AND field_name=? LIMIT 1";
+        $redcap_data = $this->getDataTable((int) $project_id);
+
+        $sql = "SELECT `value` AS `complete` FROM $redcap_data WHERE project_id=? AND `record`=? AND `event_id`=? AND ifnull(`instance`, 1)=? AND field_name=? LIMIT 1";
         $params = [ $project_id, $record, $event_id, $repeat_instance, $complete_field ];
 
         $x = $this->fetchRecords($sql, $params);
@@ -393,7 +395,7 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
         $j = 0;
         $len_1 = strlen( $calcExpression ) - 1;
 
-        $this->logDebugMessage('parseExpressionFields', $calcExpression);
+        //$this->logDebugMessage('parseExpressionFields', $calcExpression);
 
         while ( $i !== false && $j < $len_1 ){
 
@@ -485,4 +487,22 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
  
         return $this->query($sql, [$this->getProjectId(), $msg, $msgcat]);
     }
+
+    /**
+     * 
+     * @param int $project_id 
+     * @return string 
+     */
+    public function getDataTable( int $project_id=0 ):string {
+
+        if ( !is_numeric($project_id) || $project_id < 1 ) $project_id = (int) $this->getProjectId();
+
+        if ( method_exists('REDCap', "getDataTable") ) {
+            
+            return REDCap::getDataTable($project_id);
+        }
+
+        return "redcap_data";
+    }
+
 }

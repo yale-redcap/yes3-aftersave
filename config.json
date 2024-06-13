@@ -20,6 +20,11 @@
 
     "versions":[
         {
+            "version": "v1.0.0",
+            "version-date": "2024-03-23",
+            "version-change-summary": "REDCap v14 compatibility"
+        },
+        {
             "version": "v0.0.1",
             "version-date": "2023-05-20",
             "version-change-summary": "Initial commit."
