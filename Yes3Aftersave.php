@@ -182,11 +182,9 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
     public function redcap_module_ajax($action, $payload, $project_id, $record, $instrument, $event_id, $repeat_instance, $survey_hash, $response_id, $survey_queue_hash, $page, $page_full, $user_id, $group_id){
 
         if ( $action==="setConfig" ) return $this->setConfig( $project_id );
-
+        
         return "The action '{$action}' is not supported.";
     }
-
-    
 
     /**
      * Ransacks field metadata to build the required structures, and saves them as EM config settings.
