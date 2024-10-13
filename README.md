@@ -30,9 +30,17 @@ To run the YES3 Aftersave Utility, open the "YES3 Aftersave" EM link and click t
 
 ### Step 2. Review and adjust the EM configuration settings
 
-In the YES3 Aftersave EM configuration settings you will find all of the dependent forms listed. For each one, you may change the behavior of YES3 Aftersave recalculations. The default is for YES3 Aftersave to perform recalculations only if a form is non-empty. This is the REDCap default for recalculations, including Rule H. 
+Open the **YES3 Aftersave EM configuration settings**. You will find all of the dependent forms listed. For each one, you may change the behavior of YES3 Aftersave recalculations. The default is for YES3 Aftersave to perform recalculations only if a form is non-empty. This is the REDCap default for recalculations, including Rule H. 
 
-In our studies, we often have a "tracking form" that consists entirely of calculated fields for monitoring participant study progress and indicators for controlling workflows. Under the normal REDCap behavior these forms would have to be manually saved for each record, even though there's never any data entry. For such forms we offer the "always recalculate" option.
+#### Setting forms to always recalculate
+
+In our studies, we often have a "tracking form" that consists entirely of calculated fields for monitoring participant study progress and for controlling workflows. Under the normal REDCap behavior these forms would have to be manually saved for each record, even though there's never any data entry into the form. **For such forms we offer the "always recalculate" option**.
+
+In the screenshot below, we have set one form, named 'tracking', to always recalculate whenever another form contributing to its calculations is saved.
+
+![image of the YES3 Aftersave EM configuration panel](./media/em-configuration.png)
+
+#### Ignoring forms
 
 You may also choose to have YES3 Aftersave ignore any dependent form.
 
