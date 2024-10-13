@@ -4,7 +4,7 @@ Peter Charpentier
 <br>CRI Web Tools LLC
 <br>Yale University
 
-June 2023
+October 2024
 
 YES3 Aftersave ensures that affected calculated fields on forms other than a form being saved are updated and saved in real time.
 
@@ -48,6 +48,6 @@ You may also choose to have YES3 Aftersave ignore any dependent form.
 
 ## ACKNOWLEDGEMENTS
 
-Thanks to **Adam Nunez** and **Andrew Poppe** for insights into the REDCap calculation execution and save processes.
+Thanks to **Adam Nunez** for insights into the REDCap calculation execution and save processes.
 
 **chatGPT plus** is awarded partial credit for the name of this module.
