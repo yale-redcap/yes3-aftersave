@@ -19,9 +19,9 @@
 
     "versions":[
         {
-            "version": "v1.0.1",
-            "version-date": "2024-10-13",
-            "version-change-summary": "Tidied up for deployment!"
+            "version": "v1.0.2",
+            "version-date": "2024-10-15",
+            "version-change-summary": "Framework updated to 14"
         },
         {
             "version": "v1.0.0",
@@ -137,8 +137,8 @@
 
     "compatibility": {
         "php-version-min": "7.4",
-        "redcap-version-min": "13.4.9"
+        "redcap-version-min": "13.7.3"
     },
 
-    "framework-version": 12
+    "framework-version": 14
 }
