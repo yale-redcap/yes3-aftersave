@@ -3,7 +3,7 @@
 
     "namespace": "Yale\\Yes3Aftersave",
 
-    "description": "YES3 Aftersave seeks to ensure that calculations involving data from multiple forms are updated and saved in real time. It works by first identifying all forms having fields that figure in calculations on other forms. When any of these `aftersave` forms is saved, all of the affected calculations on `dependent` forms are updated and saved. The default REDCap recalculation behavior of bypassing empty forms can be overriden for any dependent form. A multipass recalculation is performed, that should ensure that complex expressions involving interdependent calculated fields are resolved correctly.",
+    "description": "YES3 Aftersave seeks to ensure that calculations involving data from multiple forms are updated and saved in real time. It works by first identifying all forms having fields that figure in calculations on other forms. When any of these `aftersave` forms is saved, all of the affected calculations on `dependent` forms are updated and saved. The default REDCap recalculation behavior of bypassing empty forms can be overriden for any dependent form. A multipass recalculation is performed, that should ensure that complex expressions involving interdependent calculated fields are resolved correctly. This release is compatible with multi-arm projects.",
 
     "documentation": "https://yale-redcap.github.io/yes3-aftersave/",
 
@@ -18,6 +18,11 @@
     ],
 
     "versions":[
+        {
+            "version": "v1.0.4",
+            "version-date": "2024-12-05",
+            "version-change-summary": "Now compatible with multi-arm projects."
+        },
         {
             "version": "v1.0.2",
             "version-date": "2024-10-15",
