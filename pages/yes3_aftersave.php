@@ -141,6 +141,31 @@ $module->initializeJavascriptModuleObject();
 
                 $(".y3as-response").show();
 
+                // error report
+                let htmler = "";
+
+                let ke = response.error_report.length;
+
+                if ( ke > 0 ){
+
+                    htmler += "<h5>Calculation Expression Error Report</h5>";
+
+                    htmler += "<p>Aftersave detected " + ke + " calculation expression error(s):</p>";
+
+                    for(let i=0; i<response.error_report.length; i++){
+
+                        htmler += "<li>" + response.error_report[i] + "</li>";
+                    }
+
+                    htmler += "</ul>";
+
+                } else {
+
+                    htmler += "<p>No calculation expression errors were detected.</p>";
+                }
+
+                $('#y3as-response-error_report').html(htmler);
+
             }).catch(function(err){
 
                 console.error(err);
@@ -184,6 +209,15 @@ $module->initializeJavascriptModuleObject();
         <div class="col-lg-6">
             <i class="fa-solid fa-print y3as-action-icon float-end d-print-none y3as-response" title="print this report" onclick="window.print()"></i>
         </div>
+    </div>
+
+    <div class="row" style="margin-top:20px;">
+        <div class="col-lg-12"id="y3as-response-error_report">
+        </div>      
+    </div>
+
+    <div class="row" style="margin-top:0;">
+        <h5 class="y3as-response">Calculation Dependency Summary</h5>  
     </div>
 
     <div class="row">
