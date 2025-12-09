@@ -19,6 +19,11 @@
 
     "versions":[
         {
+            "version": "v1.0.6",
+            "version-date": "2024-12-08",
+            "version-change-summary": "Testing & validation improvements."
+        },
+        {
             "version": "v1.0.5",
             "version-date": "2024-12-07",
             "version-change-summary": "Syntax error report added to config set."

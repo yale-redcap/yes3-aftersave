@@ -217,7 +217,7 @@ $module->initializeJavascriptModuleObject();
     </div>
 
     <div class="row" style="margin-top:0;">
-        <h5 class="y3as-response">Calculation Dependency Summary</h5>  
+        <h5 class="y3as-response">Calculation Dependency Report</h5>  
     </div>
 
     <div class="row">
