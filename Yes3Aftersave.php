@@ -240,6 +240,7 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
          * Now recalculate, until no changes noted.
          */
         $iter = 0;
+        $K = 0;
 
         while ( $iter < $this->MAX_SAVE_PASSES ){
 
@@ -247,11 +248,17 @@ class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
 
             $k = Calculate::saveCalcFields( $record, $fields, $event_id );
 
+            if ( $this->testing ) {
+                print "&rarr;Recalculation pass {$iter} for form '{$form_name}' for record '{$record}', event_id '{$event_id}', repeat_instance '{$repeat_instance}': {$k} field(s) recalculated<br />";
+            }
+
             if ( !$k ) break;
+
+            $K += $k;
         }
 
         if ( $this->testing ) {
-            print "&rarr;Completed recalculation passes ({$iter}) for form '{$form_name}' for record '{$record}', event_id '{$event_id}', repeat_instance '{$repeat_instance}'<br />";   
+            print "&rarr;Completed recalculation passes ({$iter}) and {$K} total field(s) recalculated for form '{$form_name}' for record '{$record}', event_id '{$event_id}', repeat_instance '{$repeat_instance}'<br />";   
         }
 
         return $iter;
