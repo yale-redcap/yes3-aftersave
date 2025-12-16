@@ -13,15 +13,14 @@ use Exception;
 
 class Yes3Aftersave extends \ExternalModules\AbstractExternalModule
 {
-    private $AFTERSAVE_ACTION_IGNORE = "1";
-    private $AFTERSAVE_ACTION_NONEMPTY = "2";
-    private $AFTERSAVE_ACTION_ALWAYS = "3";
-    private $AFTERSAVE_ACTION_DEFAULT = "2";
-    private $MAX_SAVE_PASSES = 8;
-    private $DEFAULT_FORM_COMPLETE = "1";
-    public  $LOG_DEBUG_TABLE = "ydcclib_debug_messages";
-    public  $ALLOW_DEBUG_LOGGING = false;
-    public  $testing = false;
+    private $AFTERSAVE_ACTION_IGNORE = "1"; // do not recalculate
+    private $AFTERSAVE_ACTION_DEFAULT = "2"; // recalculate if non-empty
+    private $AFTERSAVE_ACTION_ALWAYS = "3"; // always recalculate
+    private $MAX_SAVE_PASSES = 8; // maximum passes to attempt to recalculate dependent fields
+    private $DEFAULT_FORM_COMPLETE = "1"; // default value to set form completion status after recalculation (if empty)
+    public  $LOG_DEBUG_TABLE = "ydcclib_debug_messages"; // debug log table name, if used
+    public  $ALLOW_DEBUG_LOGGING = false; // set to true to enable debug logging to aforementioned table
+    public  $testing = false; // set to true to enable testing output
 
     function redcap_save_record ( 
         $project_id,
