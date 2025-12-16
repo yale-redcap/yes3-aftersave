@@ -157,8 +157,8 @@
 
     "compatibility": {
         "php-version-min": "7.4",
-        "redcap-version-min": "13.7.3"
+        "redcap-version-min": "14.0.2"
     },
 
-    "framework-version": 14
+    "framework-version": 15
 }
