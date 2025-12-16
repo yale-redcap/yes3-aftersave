@@ -6,6 +6,13 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+/*
+ * YES3 Aftersave Workshop Page
+ *
+ * This page is intended for testing and experimenting with the YES3 Aftersave module features.
+ * It is not part of the standard module functionality and should be used in a controlled environment.
+ */
+
 $module = new Yes3Aftersave();
 
 $module->testing = true;
@@ -56,10 +63,11 @@ function redcap_save_record_test( $module ){
 }
 
 function printConfig($config){
+    global $module;
 
     echo "<h5>Current Configuration Data</h5>";
     echo "<pre>";
-    print_r( $config );
+    print_r( $module->escape($config) );
     echo "</pre>";
 }
 
